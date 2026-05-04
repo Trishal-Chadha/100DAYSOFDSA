@@ -1,42 +1,55 @@
 #include <stdio.h>
+// This header file is used for input-output functions like printf
 
 int main() {
-    int n;
-    scanf("%d", &n);
+    // Main function where execution of program starts
 
-    int matrix[n][n];
-    int isIdentity = 1;
+    int arr[] = {1, 3, 5, 7, 9};
+    // This is a sorted array on which Binary Search is applied
 
-    // Input matrix elements
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            scanf("%d", &matrix[i][j]);
+    int n = 5;
+    // Stores the total number of elements in the array
+
+    int target = 5;
+    // The element we want to search in the array
+
+    int low = 0, high = n - 1, mid;
+    // low = starting index, high = last index, mid = middle index
+
+    while (low <= high) {
+        // Loop runs until the search space is valid
+
+        mid = (low + high) / 2;
+        // Calculate the middle index of the current search space
+
+        if (arr[mid] == target) {
+            // Check if middle element is equal to target
+
+            printf("Element found at index %d", mid);
+            // Print the index where element is found
+
+            return 0;
+            // Exit the program after finding the element
+        }
+
+        else if (target < arr[mid]) {
+            // If target is smaller than middle element
+
+            high = mid - 1;
+            // Move to the left half of the array
+        }
+
+        else {
+            // If target is greater than middle element
+
+            low = mid + 1;
+            // Move to the right half of the array
         }
     }
 
-    // Check identity condition
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            if(i == j) {
-                if(matrix[i][j] != 1) {
-                    isIdentity = 0;
-                    break;
-                }
-            } else {
-                if(matrix[i][j] != 0) {
-                    isIdentity = 0;
-                    break;
-                }
-            }
-        }
-        if(isIdentity == 0)
-            break;
-    }
-
-    if(isIdentity)
-        printf("Identity Matrix");
-    else
-        printf("Not an Identity Matrix");
+    printf("Element not found");
+    // This runs if element is not present in array
 
     return 0;
+    // End of program
 }
